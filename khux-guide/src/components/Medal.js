@@ -11,6 +11,19 @@ export default class Medal extends Component {
     }
   }
 
+  translateTargetsImage = () =>{
+    const { medal } = this.state
+    
+    switch(medal.targets.toLowerCase()) {
+      case 'single':
+        return require('../resources/imgs/single.png')
+      case 'all':
+        return require('../resources/imgs/all.png')
+      default:
+        return require('../resources/imgs/single.png')
+    }
+  }
+
   translateTierToImage = () => {
     const { medal } = this.state
     
@@ -68,39 +81,48 @@ export default class Medal extends Component {
     const { medal } = this.state
     return (
       <View style={ styles.container }>
-        <View style={ styles.medalImages }>
-          <Image
-            source={ {uri: medal.image_link} }
-            style={ styles.itemImageStyle }
-          />
-          <View style={ styles.medalImageSubtitle }>
+      
+        <Text
+          numberOfLines={ 2 }
+          ellipsizeMode='tail'
+          style={ styles.medalName }
+        >
+          { medal.rarity }★ { medal.name.toUpperCase() }
+        </Text>
+
+        <View style={ styles.infoContainer }>
+          <View style={ styles.medalImages }>
             <Image
-              source={ this.translateAttribute() }
-              style={ styles.subtitleImage }
+              source={ {uri: medal.image_link} }
+              style={ styles.itemImageStyle }
             />
-            <Image
-              source={ this.translateDirection() }
-              style={ styles.subtitleImage }
-            />
-            <Image
-              source={ this.translateTierToImage() }
-              style={ styles.subtitleImage }
-            />
+            <View style={ styles.medalImageSubtitle }>
+              <Image
+                source={ this.translateAttribute() }
+                style={ styles.subtitleImage }
+              />
+              <Image
+                source={ this.translateDirection() }
+                style={ styles.subtitleImage }
+              />
+              <Image
+                source={ this.translateTierToImage() }
+                style={ styles.subtitleImage }
+              />
+              <Image
+                source={ this.translateTargetsImage() }
+                style={ styles.subtitleImage }
+              />
+            </View>
           </View>
-        </View>
-        <View style={ styles.writtenInformation }>
-          <Text
-            numberOfLines={ 2 }
-            ellipsizeMode='tail'
-            style={ styles.medalName }
-          >
-            { medal.rarity }★ { medal.name.toUpperCase() }
-          </Text>
-          <Text>Multiplier: { medal.multiplier } </Text>
-          <Text>Hits: { medal.hits }</Text>
-          <Text>SP cost: { medal.cost }</Text>
-          <Text>Strength: { medal.strength }</Text>
-          <Text>Defense: { medal.defence }</Text>
+          
+          <View style={ styles.writtenInformation }>
+            <Text>Multiplier: { medal.multiplier } </Text>
+            <Text>Hits: { medal.hits }</Text>
+            <Text>SP cost: { medal.cost }</Text>
+            <Text>Strength: { medal.strength }</Text>
+            <Text>Defense: { medal.defence }</Text>
+          </View>
         </View>
       </View>
     )
@@ -114,14 +136,16 @@ const smallImages = {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
     flex: 1,
-    backgroundColor: '#237EC0',
     borderRadius: 10,
     margin: 10,
     padding: 5,
     borderWidth: 1,
-    borderColor: '#5480CC'
+    borderColor: '#5480CC',
+    flexDirection: 'column'
+  },
+  infoContainer: {
+    flexDirection: 'row'
   },
   medalImages: {
     flexDirection: 'column',
@@ -142,6 +166,7 @@ const styles = StyleSheet.create({
   },
   medalName: {
     fontWeight: 'bold',
+    flex: 1,
   },
   writtenInformation: {
     marginLeft: 10,
