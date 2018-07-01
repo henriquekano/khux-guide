@@ -1,9 +1,10 @@
-import React from 'react';
-import { StyleSheet, Image, View } from 'react-native';
+import React, { Component } from 'react'
+import { StyleSheet, View } from 'react-native'
 import { filterItens } from './src/khuxbotApiCaller'
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler'
+import Medal from './src/components/Medal'
 
-export default class App extends React.Component {
+export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -13,7 +14,6 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.loadMedals()
-      .then(console.log('yay'))
   }
 
   loadMedals = () => {
@@ -26,20 +26,19 @@ export default class App extends React.Component {
       }
     })
     .then(itens => this.setState({ itens }))
+    .catch(console.log)
 }
 
   render() {
     const { itens } = this.state
-    console.log(itens)
     return (
       <View style={ styles.container }>
         <FlatList
           data={ itens }
           keyExtractor={ (item) => item.id.toString() }
           renderItem={ ({item}) => 
-            <Image
-              source={ {uri: item.image_link} }
-              style={ styles.itemImageStyle }
+            <Medal
+              medal={ item }
             />
           }
         />
@@ -50,10 +49,7 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20
+    marginTop: 22,
+    backgroundColor: '#0c3859'
   },
-  itemImageStyle: {
-    width: 100,
-    height: 100
-  }
 });

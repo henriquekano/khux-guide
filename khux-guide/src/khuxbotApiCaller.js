@@ -21,4 +21,5 @@ export const filterItens = (parameters) => {
     return fetch(uri, requestInfo)
         .then(response => response.json())
         .then(itens => itens.map(prefixImageLinks))
+        .catch(console.log)
 } 
