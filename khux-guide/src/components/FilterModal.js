@@ -12,6 +12,14 @@ export default class FilterModal extends Component {
     }
   }
 
+  componentWillUnmount() {
+    const goBack = this.props.navigation.getParam('onGoBack', undefined)
+    const { tierFilter } = this.state
+    if (goBack) {
+      goBack(tierFilter)
+    }
+  }
+
   _tierWasClickedCallback = (value) => {
     const {
       tierFilter: currentTierFilter
@@ -28,7 +36,6 @@ export default class FilterModal extends Component {
         .filter(item => item !== value)
     }
 
-    console.warn(newFilter)
     this.setState({
       tierFilter: newFilter
     })
@@ -63,15 +70,12 @@ export default class FilterModal extends Component {
       require('../resources/imgs/tier8.png'),
     ]
 
-    const a = tierImages.map((image, index) =>
+    return tierImages.map((image, index) =>
       this._renderSelectableImage({
         source: image,
-        value: index
+        value: index + 1
       })
     )
-    console.log(a)
-
-    return a
   }
 
   render() {

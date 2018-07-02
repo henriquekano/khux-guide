@@ -10,34 +10,46 @@ export default class MedalFilter extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            itens: []
+            itens: [],
+            filters: [5]
         }
     }
 
     componentDidMount() {
-        this.loadMedals()
+        const { filters } = this.state
+        this.loadMedals(filters)
     }
 
-    loadMedals = () => {
-        return filterItens({
-            "filter": {
-                "tier": {
-                    "min": 4,
-                    "max": 6
-                }
-            }
-        })
-            .then(itens => this.setState({ itens }))
+    loadMedals = (filters) => {
+        return filterItens(filters)
+            .then(itens => {
+                console.log(itens)
+                this.setState({ itens })
+            })
             .catch(console.log)
+    }
+
+    _fetchFilters = (filters) => {
+        this.setState({ filters: filters })
+        this.loadMedals(filters)
+    }
+
+    _showModal = () => {
+        const { navigation } = this.props
+
+        navigation.navigate(
+            'MyModal', {
+                onGoBack: this._fetchFilters
+            }
+        )
     }
 
     render() {
         const { itens } = this.state
-        const { navigation } = this.props
         return (
             <View style={styles.container}>
                 <TouchableOpacity
-                    onPress={ () => navigation.navigate('MyModal') }
+                    onPress={ () => this._showModal() }
                 >
                     <Text style={styles.filterInput}>
                         Filters
