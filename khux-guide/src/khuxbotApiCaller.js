@@ -43,7 +43,6 @@ const createATierPromiseForEachElement = (list) => {
         return fetch(uri, request)
             .then(response => response.json())
             .then(itens => itens.map(prefixImageLinks))
-            .catch(console.log)
     })
 }
 
@@ -52,5 +51,4 @@ export const filterItens = (tierFilter) => {
         tierFilter
     ))
     .then(arrayOfArrays => flatten(arrayOfArrays))
-    .then(values => console.log(values) || values)
 } 

@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import {
-    StyleSheet, View, TouchableOpacity, Text, Button
+    StyleSheet,
+    View,
+    TouchableOpacity,
+    Text,
+    ActivityIndicator,
+    Dimensions,
 } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import { filterItens } from '../khuxbotApiCaller'
@@ -11,7 +16,8 @@ export default class MedalFilter extends Component {
         super(props)
         this.state = {
             itens: [],
-            filters: [5]
+            filters: [5],
+            loading: true,
         }
     }
 
@@ -21,12 +27,15 @@ export default class MedalFilter extends Component {
     }
 
     loadMedals = (filters) => {
+        this.setState({
+            loading: true
+        })
         return filterItens(filters)
             .then(itens => {
-                console.log(itens)
-                this.setState({ itens })
+                this.setState({ itens,
+                    loading: false
+                })
             })
-            .catch(console.log)
     }
 
     _fetchFilters = (filters) => {
@@ -44,10 +53,24 @@ export default class MedalFilter extends Component {
         )
     }
 
-    render() {
-        const { itens } = this.state
-        return (
-            <View style={styles.container}>
+    _renderBody = () => {
+        if (this.state.loading) {
+            return <View style={[ styles.container, {
+                width: Dimensions.get('screen').width,
+                height: Dimensions.get('screen').height,
+            } ]}>
+                <ActivityIndicator
+                    style={{
+                        flex: 1,
+                        alignItems: 'center'
+                    }}
+                    size='large'
+                />
+            </View>
+        } else {
+            const { itens } = this.state
+
+            return <View style={styles.container}>
                 <TouchableOpacity
                     onPress={ () => this._showModal() }
                 >
@@ -66,13 +89,16 @@ export default class MedalFilter extends Component {
                     }
                 />
             </View>
-        );
+        }
     }
+
+    render = this._renderBody
 }
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 23
+        marginTop: 23,
+        marginBottom: 60,
     },
     filterInput: {
         borderRadius: 10,
