@@ -16,7 +16,6 @@ function flatten(listOfLists) {
         }
         return flattenedList
     }
-    
     return listOfLists
 }
 
@@ -51,4 +50,4 @@ export const filterItens = (tierFilter) => {
         tierFilter
     ))
     .then(arrayOfArrays => flatten(arrayOfArrays))
-} 
+}

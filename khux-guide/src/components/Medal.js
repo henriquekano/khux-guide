@@ -13,7 +13,6 @@ export default class Medal extends Component {
 
   translateTargetsImage = () =>{
     const { medal } = this.state
-    
     switch(medal.targets.toLowerCase()) {
       case 'single':
         return require('../resources/imgs/single.png')
@@ -26,7 +25,6 @@ export default class Medal extends Component {
 
   translateTierToImage = () => {
     const { medal } = this.state
-    
     switch(medal.tier) {
       case 1:
         return require('../resources/imgs/tier1.png')
@@ -51,7 +49,6 @@ export default class Medal extends Component {
 
   translateAttribute = () => {
     const { medal } = this.state
-    
     switch(medal.element.toLowerCase()) {
       case 'magic':
         return require('../resources/imgs/magic.png')
@@ -66,7 +63,6 @@ export default class Medal extends Component {
 
   translateDirection = () => {
     const { medal } = this.state
-    
     switch(medal.direction.toLowerCase()) {
       case 'upright':
         return require('../resources/imgs/upright.png')
@@ -81,7 +77,6 @@ export default class Medal extends Component {
     const { medal } = this.state
     return (
       <View style={ styles.container }>
-      
         <Text
           numberOfLines={ 2 }
           ellipsizeMode='tail'
@@ -115,7 +110,7 @@ export default class Medal extends Component {
               />
             </View>
           </View>
-          
+
           <View style={ styles.writtenInformation }>
             <Text>Multiplier: { medal.multiplier } </Text>
             <Text>Hits: { medal.hits }</Text>

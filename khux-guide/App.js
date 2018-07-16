@@ -1,6 +1,8 @@
 import React from 'react'
-import { createStackNavigator } from 'react-navigation'
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
+import { Text } from 'react-native'
 import MedalFilter from './src/screens/MedalFilter'
+import News from './src/screens/News'
 import FilterModal from './src/components/FilterModal'
 
 const MainStack = createStackNavigator({
@@ -19,7 +21,7 @@ const RootStack = createStackNavigator(
     },
     MyModal: {
       screen: FilterModal,
-    },  
+    },
   },
   {
     mode: 'modal',
@@ -27,9 +29,24 @@ const RootStack = createStackNavigator(
   }
 );
 
+const NewsStack = createStackNavigator({
+  Latest: {
+    screen: News,
+  },
+})
 
-export default class App extends React.Component {
-  render() {
-    return <RootStack />;
-  }
-}
+export default createBottomTabNavigator({
+  News: NewsStack,
+  Medals: RootStack,
+},{
+  navigationOptions: ({ navigation }) => ({
+    tabBarIcon: ({ focused, tintColor }) => {
+      const { routeName } = navigation.state
+      if (routeName === 'Medals') {
+        return <Text>{ '★' }</Text>
+      } else if (routeName === 'News') {
+        return <Text>{ '📰' }</Text>
+      }
+    },
+  })
+})
