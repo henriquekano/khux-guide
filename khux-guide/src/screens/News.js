@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 import { latest } from '../newsApiCaller'
 import HTML from 'react-native-render-html'
+import Clock from '../components/Clock'
 
 export default class News extends Component {
     static navigationOptions = {
@@ -39,6 +40,7 @@ export default class News extends Component {
         const { news } = this.state
         return (
             <View>
+                <Clock style={styles.clock} />
                 <FlatList
                     style={ styles.container }
                     data={ news }
@@ -64,4 +66,8 @@ export default class News extends Component {
 const styles = StyleSheet.create({
     container: {
     },
+    clock: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 });
