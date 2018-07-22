@@ -28,31 +28,40 @@ export default class News extends Component {
     _fetchNews = () => {
         latest()
             .then(news => this.setState({ news }))
+            .catch(console.log)
+    }
+
+    _navigateToSelectedNews = (news) => {
+        this.props.navigation.navigate('SelectedNews', news)
     }
 
     render = () => {
         const { news } = this.state
         return (
-            <FlatList
-                style={ styles.container }
-                data={ news }
-                keyExtractor={ (oneNews) => oneNews.detailsPage }
-                renderItem={ ({ item }) =>
-                    <TouchableOpacity style={{
-                        margin: 10,
-                        flexDirection: 'row',
-                    }}>
-                        <Text> { item.date } - </Text>
-                        <HTML html={item.title} />
-                    </TouchableOpacity>
-                }
-            />
+            <View>
+                <FlatList
+                    style={ styles.container }
+                    data={ news }
+                    keyExtractor={ (oneNews) => oneNews.detailsPage }
+                    renderItem={ ({ item }) =>
+                        <TouchableOpacity
+                            onPress={ () => this._navigateToSelectedNews(item) }
+                            style={{
+                                margin: 10,
+                                flexDirection: 'row',
+                            }}
+                        >
+                            <Text> { item.date } - </Text>
+                            <HTML html={item.title} />
+                        </TouchableOpacity>
+                    }
+                />
+            </View>
           )
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 60,
     },
 });

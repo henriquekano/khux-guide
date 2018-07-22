@@ -14,7 +14,7 @@ export const latest = () => {
             return newsInformations.map( news => {
                 const date = news.find(item => item.attributes.class === 'date').value
                 const title = unescape(news.find(item => item.attributes.class === 'subject').value)
-                const detailsPage = baseUrl + news.find(item => item.attributes.class === 'subject').attributes.href
+                const detailsPage = baseUrl + '/' + news.find(item => item.attributes.class === 'subject').attributes.href
                 const type = news.find(item => item.attributes.class.includes('news_cat')).value
 
                 return {

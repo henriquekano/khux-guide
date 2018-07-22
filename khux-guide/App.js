@@ -3,6 +3,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import { Text } from 'react-native'
 import MedalFilter from './src/screens/MedalFilter'
 import News from './src/screens/News'
+import SelectedNews from './src/screens/SelectedNews'
 import FilterModal from './src/components/FilterModal'
 
 const MainStack = createStackNavigator({
@@ -32,6 +33,9 @@ const RootStack = createStackNavigator(
 const NewsStack = createStackNavigator({
   Latest: {
     screen: News,
+  },
+  SelectedNews: {
+    screen: SelectedNews,
   },
 })
 
