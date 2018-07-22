@@ -20,8 +20,12 @@
   },
   "dependencies": {
     "expo": "^27.0.1",
+    "moment-timezone": "^0.5.21",
     "react": "16.3.1",
     "react-native": "~0.55.2",
-    "react-navigation": "^2.5.5"
+    "react-native-render-html": "^3.10.0",
+    "react-navigation": "^2.5.5",
+    "react-timer-mixin": "^0.13.4",
+    "react-xml-parser": "^1.0.7"
   }
 }

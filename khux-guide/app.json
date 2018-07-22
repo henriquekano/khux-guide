@@ -1,5 +1,29 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
+    "name": "khux-guide",
+    "description": "Khux mobile database",
+    "slug": "khux-guide",
+    "privacy": "public",
+    "sdkVersion": "28.0.0",
+    "platforms": ["android"],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "br.com.henriquekano",
+      "versionCode": 2
+    }
   }
 }
